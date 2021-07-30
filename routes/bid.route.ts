@@ -5,18 +5,18 @@ import {BidController} from "../controllers";
 const router = express.Router();
 
 router.get("/", async function(req, res) {
-    const user = req.body.user;
-    if(user === undefined){
-        const connection = await DatabaseUtils.getConnection();
-        const bidController = new BidController(connection);
-        const bidsList = await bidController.getAll();
-        res.json(bidsList);
-    }else{
-        const connection = await DatabaseUtils.getConnection();
-        const bidController = new BidController(connection);
-        const bids = await bidController.getUserBids(user);
-        res.json(bids);
-    }
+    const connection = await DatabaseUtils.getConnection();
+    const bidController = new BidController(connection);
+    const bidsList = await bidController.getAll();
+    res.json(bidsList);
+});
+
+router.get("/:user", async function(req, res) {
+    const user = req.params.id;
+    const connection = await DatabaseUtils.getConnection();
+    const bidController = new BidController(connection);
+    const bids = await bidController.getUserBids(user);
+    res.json(bids);
 });
 
 router.post("/", async function(req, res) {
