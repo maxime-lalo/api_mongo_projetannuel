@@ -5,7 +5,7 @@ import { MongoClient } from "mongodb";
 export class DatabaseUtils {
         private static connection?: MongoClient;
 
-        static async getConnection(): Promise<MongoClient|undefined> {
+        static async getConnection(): Promise<MongoClient> {
             
             try{
                 
@@ -17,7 +17,8 @@ export class DatabaseUtils {
             return client;
             }catch(err){
                 console.log(err);
-                return undefined;
+                const client = new MongoClient("");
+                return client;
             }
         }
 
