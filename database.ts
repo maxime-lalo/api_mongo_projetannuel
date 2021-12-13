@@ -14,7 +14,7 @@ export class DatabaseUtils {
 
                 return client;
             }catch(err){
-                console.log(err);
+                console.log("Error while initializing connection : ",err);
                 return client;
             }
         }
